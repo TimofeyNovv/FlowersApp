@@ -1,4 +1,4 @@
-package com.example.flowerly.ui
+package com.example.flowerly.ui.Screens
 
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.Arrangement
@@ -27,7 +27,7 @@ import com.example.flowerly.ui.theme.fontFamilyMerriweatherItatic
 import com.example.flowerly.ui.theme.fontFamilyPacificoregular
 
 @Composable
-fun SingUpScreen(modifier: Modifier = Modifier) {
+fun WelcomeScreen(modifier: Modifier = Modifier) {
     Box(modifier = Modifier.fillMaxSize()) {
         Image(
             painter = painterResource(id = R.drawable.backgroundflowerly),
@@ -78,6 +78,6 @@ fun SingUpScreen(modifier: Modifier = Modifier) {
 
 @Preview
 @Composable
-private fun SingUpScreenPrev() {
-    SingUpScreen()
+private fun WelcomeScreenPrev() {
+    WelcomeScreen()
 }
