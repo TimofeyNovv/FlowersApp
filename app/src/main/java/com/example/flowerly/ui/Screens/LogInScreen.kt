@@ -3,7 +3,6 @@ package com.example.flowerly.ui.Screens
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
-import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
@@ -40,7 +39,7 @@ import com.example.flowerly.ui.theme.fontFamilyMerriweatherItatic
 import com.example.flowerly.ui.theme.fontFamilyPacificoregular
 
 @Composable
-fun LogInScreen(modifier: Modifier = Modifier) {
+fun LogInScreen(modifier: Modifier = Modifier, onBack: () -> Unit, onLoginSuccess: () -> Unit) {
 
     var email by remember { mutableStateOf("") }
 
@@ -208,10 +207,4 @@ fun LogInScreen(modifier: Modifier = Modifier) {
             }
         }
     }
-}
-
-@Preview
-@Composable
-private fun LogInScreenPrev() {
-    LogInScreen()
 }

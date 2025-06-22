@@ -27,7 +27,11 @@ import com.example.flowerly.ui.theme.fontFamilyMerriweatherItatic
 import com.example.flowerly.ui.theme.fontFamilyPacificoregular
 
 @Composable
-fun WelcomeScreen(modifier: Modifier = Modifier) {
+fun WelcomeScreen(
+    modifier: Modifier = Modifier,
+    onSignUpClick: () -> Unit,
+    onLoginClick: () -> Unit
+) {
     Box(modifier = Modifier.fillMaxSize()) {
         Image(
             painter = painterResource(id = R.drawable.backgroundflowerly),
@@ -60,7 +64,7 @@ fun WelcomeScreen(modifier: Modifier = Modifier) {
             )
 
             Button(
-                onClick = {},
+                onClick = onSignUpClick,
                 modifier = Modifier.padding(top = 130.dp).width(290.dp).height(45.dp),
                 colors = ButtonDefaults.buttonColors(
                     containerColor = Color(0xFF23C16B)
@@ -74,10 +78,4 @@ fun WelcomeScreen(modifier: Modifier = Modifier) {
             }
         }
     }
-}
-
-@Preview
-@Composable
-private fun WelcomeScreenPrev() {
-    WelcomeScreen()
 }

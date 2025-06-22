@@ -8,7 +8,6 @@ import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
-import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
@@ -40,7 +39,11 @@ import com.example.flowerly.ui.Screens.Slots.SingUpLogsSlot
 import com.example.flowerly.ui.theme.fontFamilyMerriweatherItatic
 
 @Composable
-fun SingUpScreen(modifier: Modifier = Modifier) {
+fun SingUpScreen(
+    modifier: Modifier = Modifier,
+    onBack: () -> Unit,
+    onSignUpComplete: () -> Unit
+) {
     var name by remember { mutableStateOf("") }
     var email by remember { mutableStateOf("") }
     var password by remember { mutableStateOf("") }
@@ -126,7 +129,7 @@ fun SingUpScreen(modifier: Modifier = Modifier) {
 
 
                     Button(
-                        onClick = {}, colors = ButtonDefaults.buttonColors(
+                        onClick = onSignUpComplete, colors = ButtonDefaults.buttonColors(
                             containerColor = Color(0xFF23C16B)
                         ),
                         modifier = Modifier
@@ -202,10 +205,4 @@ fun SingUpScreen(modifier: Modifier = Modifier) {
             }
         }
     }
-}
-
-@Preview
-@Composable
-private fun SingUpScreenPrev() {
-    SingUpScreen()
 }
