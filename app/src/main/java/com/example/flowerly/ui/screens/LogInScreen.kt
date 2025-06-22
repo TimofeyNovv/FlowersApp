@@ -1,4 +1,4 @@
-package com.example.flowerly.ui.Screens
+package com.example.flowerly.ui.screens
 
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
@@ -30,11 +30,10 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
-import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.example.flowerly.R
-import com.example.flowerly.ui.Screens.Slots.SingUpLogsSlot
+import com.example.flowerly.ui.screens.slots.SingUpLogsSlot
 import com.example.flowerly.ui.theme.fontFamilyMerriweatherItatic
 import com.example.flowerly.ui.theme.fontFamilyPacificoregular
 

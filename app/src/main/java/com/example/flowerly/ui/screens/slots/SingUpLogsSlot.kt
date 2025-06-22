@@ -1,4 +1,4 @@
-package com.example.flowerly.ui.Screens.Slots
+package com.example.flowerly.ui.screens.slots
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Box

@@ -7,9 +7,9 @@ import androidx.navigation.NavHostController
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import com.example.flowerly.NavData
-import com.example.flowerly.ui.Screens.LogInScreen
-import com.example.flowerly.ui.Screens.SingUpScreen
-import com.example.flowerly.ui.Screens.WelcomeScreen
+import com.example.flowerly.ui.screens.LogInScreen
+import com.example.flowerly.ui.screens.SingUpScreen
+import com.example.flowerly.ui.screens.WelcomeScreen
 
 @Composable
 fun NavigationHost(
