@@ -14,6 +14,7 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.navigation.compose.rememberNavController
 import com.example.flowerly.ui.NavigationHost
 import com.example.flowerly.ui.theme.FlowerlyTheme
+import io.github.cdimascio.dotenv.dotenv
 
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {

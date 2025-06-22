@@ -1,5 +1,6 @@
 package com.example.flowerly.ui.screens
 
+import android.util.Log
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
@@ -15,10 +16,13 @@ import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.Button
 import androidx.compose.material3.ButtonDefaults
+import androidx.compose.material3.CircularProgressIndicator
 import androidx.compose.material3.OutlinedTextField
 import androidx.compose.material3.OutlinedTextFieldDefaults
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
+import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
@@ -33,17 +37,47 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.example.flowerly.R
+import com.example.flowerly.server.AuthViewModel
 import com.example.flowerly.ui.screens.slots.SingUpLogsSlot
 import com.example.flowerly.ui.theme.fontFamilyMerriweatherItatic
 import com.example.flowerly.ui.theme.fontFamilyPacificoregular
+import androidx.lifecycle.viewmodel.compose.viewModel
 
 @Composable
-fun LogInScreen(modifier: Modifier = Modifier, onBack: () -> Unit, onLoginSuccess: () -> Unit) {
+fun LogInScreen(
+    modifier: Modifier = Modifier,
+    onBack: () -> Unit,
+    onLoginSuccess: (String) -> Unit,
+    viewModel: AuthViewModel = viewModel()
+) {
 
     var email by remember { mutableStateOf("") }
 
     var password by remember { mutableStateOf("") }
 
+    var errorMessage by remember { mutableStateOf<String?>(null) }
+
+    val authResult by viewModel.authResult.collectAsState()
+
+    val isLoading by viewModel.isLoading.collectAsState()
+
+    LaunchedEffect(authResult) {
+        when (val result = authResult) {
+            is AuthViewModel.AuthResult.Success -> {
+                result.response.accessToken?.let { token ->
+                    Log.d("AUTH", "Authentication successful, token: $token")
+                    onLoginSuccess(token)
+                } ?: run {
+                    errorMessage = "Authentication failed: invalid token"
+                }
+            }
+            is AuthViewModel.AuthResult.Error -> {
+                errorMessage = result.message
+                Log.e("AUTH", "Authentication error: ${result.message}")
+            }
+            null -> {}
+        }
+    }
 
     Box(
         modifier = Modifier.fillMaxSize(),
@@ -127,21 +161,31 @@ fun LogInScreen(modifier: Modifier = Modifier, onBack: () -> Unit, onLoginSucces
                     )
 
                     Button(
-                        onClick = {}, colors = ButtonDefaults.buttonColors(
+                        onClick = {
+                            Log.d("AUTH", "Button clicked!")
+                            if (email.isNotBlank() && password.isNotBlank()) {
+                                viewModel.authenticate(email, password)
+                            }
+                        }, colors = ButtonDefaults.buttonColors(
                             containerColor = Color(0xFF23C16B)
                         ),
                         modifier = Modifier
                             .padding(top = 60.dp)
                             .fillMaxWidth()
-                            .height(55.dp)
+                            .height(55.dp),
+                        enabled = !isLoading
                     ) {
-                        Text(
-                            text = "Log In",
-                            fontSize = 16.sp,
-                            fontWeight = FontWeight.Bold,
-                            fontFamily = fontFamilyMerriweatherItatic,
-                            color = Color.White
-                        )
+                        if (isLoading) {
+                            CircularProgressIndicator(color = Color.White)
+                        }else {
+                            Text(
+                                text = "Log In",
+                                fontSize = 16.sp,
+                                fontWeight = FontWeight.Bold,
+                                fontFamily = fontFamilyMerriweatherItatic,
+                                color = Color.White
+                            )
+                        }
                     }
 
 

@@ -1,6 +1,10 @@
 package com.example.flowerly.ui
 
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.navigation.compose.NavHost
 import androidx.navigation.NavHostController
@@ -8,6 +12,7 @@ import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import com.example.flowerly.NavData
 import com.example.flowerly.ui.screens.LogInScreen
+import com.example.flowerly.ui.screens.MainScreen
 import com.example.flowerly.ui.screens.SingUpScreen
 import com.example.flowerly.ui.screens.WelcomeScreen
 
@@ -16,6 +21,9 @@ fun NavigationHost(
     modifier: Modifier = Modifier,
     navController: NavHostController = rememberNavController()
 ) {
+
+    var authToken by remember { mutableStateOf<String?>(null) }
+
     NavHost(
         navController = navController,
         startDestination = NavData.START.route,
@@ -41,13 +49,24 @@ fun NavigationHost(
             )
         }
 
-        // Login Screen
         composable(NavData.Login.route) {
             LogInScreen(
                 onBack = { navController.popBackStack() },
-                onLoginSuccess = {
-                    navController.navigate("main_screen") {
-                        popUpTo(0)  // Полная очистка стека
+                onLoginSuccess = { token ->
+                    authToken = token // Сохраняем токен
+                    navController.navigate(NavData.MAIN.route) {
+                        popUpTo(NavData.Login.route)
+                    }
+                }
+            )
+        }
+
+        composable(NavData.MAIN.route) {
+            MainScreen(
+                onLogout = {
+                    authToken = null
+                    navController.navigate(NavData.START.route) {
+                        popUpTo(0)
                     }
                 }
             )

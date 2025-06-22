@@ -44,6 +44,16 @@ dependencies {
     implementation("androidx.navigation:navigation-compose:2.9.0")
     implementation("androidx.hilt:hilt-navigation-compose:1.2.0")
 
+    implementation ("com.squareup.retrofit2:retrofit:2.9.0")
+    implementation ("com.squareup.retrofit2:converter-gson:2.9.0")
+    implementation ("com.squareup.okhttp3:logging-interceptor:4.9.3")
+
+    implementation ("androidx.lifecycle:lifecycle-viewmodel-compose:2.6.0")
+
+    implementation ("io.github.cdimascio:dotenv-kotlin:6.4.1")
+
+    implementation ("com.google.code.gson:gson:2.8.9")
+
     implementation(libs.androidx.core.ktx)
     implementation(libs.androidx.lifecycle.runtime.ktx)
     implementation(libs.androidx.activity.compose)
