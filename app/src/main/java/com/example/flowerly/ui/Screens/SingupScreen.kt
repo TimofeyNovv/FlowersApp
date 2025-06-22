@@ -2,14 +2,18 @@ package com.example.flowerly.ui.Screens
 
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.Button
 import androidx.compose.material3.ButtonDefaults
@@ -32,6 +36,7 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.example.flowerly.R
+import com.example.flowerly.ui.Screens.Slots.SingUpLogsSlot
 import com.example.flowerly.ui.theme.fontFamilyMerriweatherItatic
 
 @Composable
@@ -124,14 +129,73 @@ fun SingUpScreen(modifier: Modifier = Modifier) {
                         onClick = {}, colors = ButtonDefaults.buttonColors(
                             containerColor = Color(0xFF23C16B)
                         ),
-                        modifier = Modifier.fillMaxWidth().padding(top = 20.dp).height(50.dp)
+                        modifier = Modifier
+                            .fillMaxWidth()
+                            .padding(top = 20.dp)
+                            .height(50.dp)
                     ) {
-                       Text(text = "Sing Up",
-                           fontSize = 16.sp,
-                           fontWeight = FontWeight.Bold,
-                           fontFamily = fontFamilyMerriweatherItatic,
-                           color = Color.White
-                       )
+                        Text(
+                            text = "Sing Up",
+                            fontSize = 16.sp,
+                            fontWeight = FontWeight.Bold,
+                            fontFamily = fontFamilyMerriweatherItatic,
+                            color = Color.White
+                        )
+                    }
+
+                    Text(
+                        text = "Continue with",
+                        fontSize = 12.sp,
+                        fontWeight = FontWeight.Light,
+                        fontFamily = fontFamilyMerriweatherItatic,
+                        color = Color(0xFF198155),
+                        modifier = Modifier.padding(top = 14.dp)
+                    )
+
+                    Row(
+                        modifier = Modifier.padding(top = 20.dp),
+                        verticalAlignment = Alignment.CenterVertically
+                    ) {
+                        Box(modifier = Modifier.clickable {
+
+                        }) {
+                            SingUpLogsSlot {
+                                Image(
+                                    painter = painterResource(id = R.drawable.googlelog),
+                                    contentDescription = "GoogleLog",
+                                    modifier = Modifier,
+                                    alignment = Alignment.Center
+                                )
+                            }
+                        }
+
+                        Spacer(modifier = Modifier.size(20.dp))
+                        Box(modifier = Modifier.clickable {
+
+                        }) {
+                            SingUpLogsSlot {
+                                Image(
+                                    painter = painterResource(id = R.drawable.applelog),
+                                    contentDescription = "AppleLog",
+                                    modifier = Modifier,
+                                    alignment = Alignment.Center
+                                )
+                            }
+                        }
+
+                        Spacer(modifier = Modifier.size(20.dp))
+                        Box(modifier = Modifier.clickable {
+
+                        }) {
+                            SingUpLogsSlot {
+                                Image(
+                                    painter = painterResource(id = R.drawable.facebooklog),
+                                    contentDescription = "FacebookLog",
+                                    modifier = Modifier,
+                                    alignment = Alignment.Center
+                                )
+                            }
+                        }
                     }
 
                 }
